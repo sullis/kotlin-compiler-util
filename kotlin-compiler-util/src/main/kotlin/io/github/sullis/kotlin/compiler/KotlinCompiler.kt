@@ -13,7 +13,7 @@ import java.io.FileWriter
 import java.nio.charset.Charset
 
 object KotlinCompiler {
-    private val charset = Charset.forName("UTF-8")
+    // private val charset = Charset.forName("UTF-8")
 
     fun compileSourceCode(vararg code: String): CompileResult {
         val sourceDir = java.nio.file.Files.createTempDirectory("KotlinCompiler-source").toFile()
@@ -22,7 +22,7 @@ object KotlinCompiler {
         for (i in 0 until code.size) {
             val filename = "$i.kt"
             val file = java.io.File(sourceDir, filename)
-            val writer = FileWriter(file, charset)
+            val writer = FileWriter(file, false)
             writer.write(code[i])
             writer.flush()
             writer.close()
