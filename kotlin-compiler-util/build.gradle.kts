@@ -21,7 +21,6 @@ dependencies {
   api(deps.kotlin.stdlib)
   implementation(deps.kotlin.reflect)
   implementation(deps.kotlin.compiler)
-  implementation(deps.test.truth)
   testImplementation(deps.kotlin.junit)
   testImplementation(deps.kotlin.compiler)
   testImplementation(deps.test.truth)
