@@ -1,14 +1,35 @@
+.classpath
+.gradle
+.project
+.settings
+eclipsebin
+
+bin
+gen
+build
+out
+lib
+reports
+
+.idea
+*.iml
+classes
+
+# Mkdocs files
+docs/1.x/*
+docs/changelog.md
+docs/contributing.md
+docs/index.md
+
+obj
+
+.DS_Store
+
 # Compiled class file
 *.class
 
 # Log file
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
 
 # Package Files #
 *.jar
