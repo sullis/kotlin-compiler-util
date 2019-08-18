@@ -3,7 +3,6 @@ package io.github.sullis.kotlin.compiler
 import java.io.File
 import java.nio.file.Path
 import java.util.ArrayList
-import java.util.concurrent.atomic.AtomicInteger
 import org.jetbrains.kotlin.cli.common.ExitCode
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageLocation
@@ -41,14 +40,19 @@ object KotlinCompiler {
     }
 
     private class MessageCollectorImpl : MessageCollector {
-        private val errorCount = AtomicInteger(0)
-        override fun hasErrors(): Boolean { return (errorCount.get() > 0) }
-        override fun clear() { errorCount.set(0) }
+        private val errors: MutableList<CompilerMessage> = mutableListOf()
+        override fun hasErrors(): Boolean { return (errors.size > 0) }
+        override fun clear() { errors.clear() }
         override fun report(severity: CompilerMessageSeverity, message: String, location: CompilerMessageLocation?) {
             if (severity.isError) {
-                errorCount.incrementAndGet()
-                System.err.println("KotlinTestHelper ERROR: " + message + " " + location)
+                errors.add(CompilerMessage(severity, message, location))
             }
         }
+
+        private data class CompilerMessage(
+          val severity: CompilerMessageSeverity,
+          val message: String,
+          val location: CompilerMessageLocation?
+        )
     }
 }
