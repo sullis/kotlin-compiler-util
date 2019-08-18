@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
 import org.jetbrains.kotlin.config.Services
 
 object KotlinCompiler {
-    fun compile(kotlinSourceDirectory: Path): MessageCollector {
+    fun compile(kotlinSourceDirectory: Path): CompileResult {
         val compilerOutputDir = File(kotlinSourceDirectory.toAbsolutePath().toString() + "-output")
         compilerOutputDir.mkdirs()
         compilerOutputDir.deleteOnExit()
@@ -33,13 +33,14 @@ object KotlinCompiler {
         args.noReflect = true
         args.destination = compilerOutputDir.getAbsolutePath()
         val exitCode = compiler.exec(msgCollector, Services.EMPTY, args)
-        if (exitCode != ExitCode.OK) {
-            System.err.println("KotlinCompiler: exitCode=" + exitCode)
-        }
-        return msgCollector
+        return CompileResult(exitCode, msgCollector)
     }
 
-    class MessageCollectorImpl : MessageCollector {
+    data class CompileResult(val exitCode: ExitCode, val messages: MessageCollector) {
+        fun isSuccess(): Boolean = (exitCode == ExitCode.OK) && !messages.hasErrors()
+    }
+
+    private class MessageCollectorImpl : MessageCollector {
         private val errorCount = AtomicInteger(0)
         override fun hasErrors(): Boolean { return (errorCount.get() > 0) }
         override fun clear() { errorCount.set(0) }
