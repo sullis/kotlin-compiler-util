@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
 import org.jetbrains.kotlin.config.Services
 import java.io.FileWriter
-import java.nio.charset.Charset
+// import java.nio.charset.Charset
 
 object KotlinCompiler {
     // private val charset = Charset.forName("UTF-8")
@@ -27,10 +27,10 @@ object KotlinCompiler {
             writer.flush()
             writer.close()
         }
-        return compile(sourceDir.toPath())
+        return compileSourceDir(sourceDir.toPath())
     }
 
-    fun compile(kotlinSourceDirectory: Path): CompileResult {
+    fun compileSourceDir(kotlinSourceDirectory: Path): CompileResult {
         val compilerOutputDir = java.nio.file.Files.createTempDirectory("KotlinCompiler-output").toFile()
         compilerOutputDir.mkdirs()
         compilerOutputDir.deleteOnExit()
