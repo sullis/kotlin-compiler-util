@@ -1,6 +1,5 @@
 package io.github.sullis.kotlin.compiler
 
-import java.io.File
 import java.nio.file.Path
 import java.util.ArrayList
 import org.jetbrains.kotlin.cli.common.ExitCode
@@ -13,7 +12,7 @@ import org.jetbrains.kotlin.config.Services
 
 object KotlinCompiler {
     fun compile(kotlinSourceDirectory: Path): CompileResult {
-        val compilerOutputDir = File(kotlinSourceDirectory.toAbsolutePath().toString() + "-output")
+        val compilerOutputDir = java.nio.file.Files.createTempDirectory("KotlinCompiler-output").toFile()
         compilerOutputDir.mkdirs()
         compilerOutputDir.deleteOnExit()
 
