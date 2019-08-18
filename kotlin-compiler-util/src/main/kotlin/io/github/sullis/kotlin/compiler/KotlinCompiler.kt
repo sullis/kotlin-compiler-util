@@ -9,8 +9,27 @@ import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
 import org.jetbrains.kotlin.config.Services
+import java.io.FileWriter
+import java.nio.charset.Charset
 
 object KotlinCompiler {
+    private val charset = Charset.forName("UTF-8")
+
+    fun compileSourceCode(vararg code: String): CompileResult {
+        val sourceDir = java.nio.file.Files.createTempDirectory("KotlinCompiler-source").toFile()
+        sourceDir.mkdirs()
+        sourceDir.deleteOnExit()
+        for (i in 0 until code.size) {
+            val filename = "$i.kt"
+            val file = java.io.File(sourceDir, filename)
+            val writer = FileWriter(file, charset)
+            writer.write(code[i])
+            writer.flush()
+            writer.close()
+        }
+        return compile(sourceDir.toPath())
+    }
+
     fun compile(kotlinSourceDirectory: Path): CompileResult {
         val compilerOutputDir = java.nio.file.Files.createTempDirectory("KotlinCompiler-output").toFile()
         compilerOutputDir.mkdirs()
