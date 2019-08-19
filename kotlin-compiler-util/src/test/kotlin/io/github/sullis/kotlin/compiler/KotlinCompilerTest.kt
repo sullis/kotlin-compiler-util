@@ -9,7 +9,7 @@ class KotlinCompilerTest {
     private val goodCode2 = "object Hello { fun echo(name: String): String { return name  } }"
 
     private val badCode = arrayOf(
-            "import kotlin.collection.BogusList",
+            "import kotlin.collections.BogusList",
             "{",
             "fun echo()"
     )
