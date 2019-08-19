@@ -29,8 +29,3 @@ dependencies {
 repositories {
   mavenCentral()
 }
-
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions {
-  freeCompilerArgs = listOf("-XXLanguage:+InlineClasses")
-}
