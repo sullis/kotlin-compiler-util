@@ -1,7 +1,7 @@
 package io.github.sullis.kotlin.compiler
 
-import org.junit.Assert.assertTrue
-import org.junit.Assert.assertFalse
+import org.jetbrains.kotlin.cli.common.ExitCode
+import org.junit.Assert.*
 import org.junit.Test
 
 class KotlinCompilerTest {
@@ -23,6 +23,8 @@ class KotlinCompilerTest {
               goodCode2,
               goodCode3)
       assertTrue(result.isSuccess())
+      assertEquals(ExitCode.OK, result.exitCode)
+      assertEquals(0, result.errors.size)
     }
 
     @Test fun badCodeShouldNotCompile() {

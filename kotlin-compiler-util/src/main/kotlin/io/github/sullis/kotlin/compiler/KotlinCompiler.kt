@@ -50,12 +50,18 @@ object KotlinCompiler {
         args.noReflect = true
         args.destination = compilerOutputDir.getAbsolutePath()
         val exitCode = compiler.exec(msgCollector, Services.EMPTY, args)
-        return CompileResult(exitCode, msgCollector)
+        return CompileResult(exitCode, msgCollector.toList())
     }
 
-    data class CompileResult(val exitCode: ExitCode, val messages: MessageCollector) {
-        fun isSuccess(): Boolean = (exitCode == ExitCode.OK) && !messages.hasErrors()
+    data class CompileResult(val exitCode: ExitCode, val errors: List<CompilerMessage>) {
+        fun isSuccess(): Boolean = (exitCode == ExitCode.OK) && errors.isEmpty()
     }
+
+    data class CompilerMessage(
+            val severity: CompilerMessageSeverity,
+            val message: String,
+            val location: CompilerMessageLocation?
+    )
 
     private class MessageCollectorImpl : MessageCollector {
         private val errors: MutableList<CompilerMessage> = mutableListOf()
@@ -71,10 +77,6 @@ object KotlinCompiler {
             return errors.toString()
         }
 
-        private data class CompilerMessage(
-          val severity: CompilerMessageSeverity,
-          val message: String,
-          val location: CompilerMessageLocation?
-        )
+        fun toList(): List<CompilerMessage> = errors.toList()
     }
 }
