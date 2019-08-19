@@ -10,10 +10,8 @@ import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
 import org.jetbrains.kotlin.config.Services
 import java.io.FileWriter
-// import java.nio.charset.Charset
 
 object KotlinCompiler {
-    // private val charset = Charset.forName("UTF-8")
 
     fun compileSourceCode(vararg code: String): CompileResult {
         val sourceDir = java.nio.file.Files.createTempDirectory("KotlinCompiler-source").toFile()
@@ -34,9 +32,6 @@ object KotlinCompiler {
         val compilerOutputDir = java.nio.file.Files.createTempDirectory("KotlinCompiler-output").toFile()
         compilerOutputDir.mkdirs()
         compilerOutputDir.deleteOnExit()
-
-        // System.out.println("kotlinSourceDirectory=" + kotlinSourceDirectory.toString())
-        // System.out.println("compilerOutputDir=" + compilerOutputDir.toString())
 
         val freeArgList = ArrayList<String>()
         freeArgList.add(kotlinSourceDirectory.toString())
