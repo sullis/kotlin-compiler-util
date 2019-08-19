@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   kotlin("jvm")
-  // id("com.vanniktech.maven.publish") version versions.mavenPublish
+  id("com.vanniktech.maven.publish") version versions.mavenPublish
 }
 
 val GROUP: String by project
