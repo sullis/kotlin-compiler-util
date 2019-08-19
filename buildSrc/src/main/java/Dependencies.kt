@@ -12,9 +12,9 @@ object deps {
     const val reflect = "org.jetbrains.kotlin:kotlin-reflect"
     const val compiler = "org.jetbrains.kotlin:kotlin-compiler"
     const val junit = "org.jetbrains.kotlin:kotlin-test-junit"
-    const val metadata = "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.1.0"
   }
   object test {
     const val truth = "com.google.truth:truth:1.0"
+    const val guava = "com.google.guava:guava:28.0-jre"
   }
 }
