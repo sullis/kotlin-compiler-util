@@ -18,7 +18,7 @@ class KotlinCompilerTest {
     )
 
     @Test fun compileHappyPath() {
-      val result = KotlinCompiler.compileSourceCode(
+      val result = KotlinCompiler().compileSourceCode(
               goodCode1,
               goodCode2,
               goodCode3)
@@ -29,7 +29,7 @@ class KotlinCompilerTest {
 
     @Test fun badCodeShouldNotCompile() {
         for (code in badCode) {
-            val result = KotlinCompiler.compileSourceCode(code)
+            val result = KotlinCompiler().compileSourceCode(code)
             assertFalse(result.isSuccess())
             assertEquals(ExitCode.COMPILATION_ERROR, result.exitCode)
             assertTrue(result.errors.isNotEmpty())

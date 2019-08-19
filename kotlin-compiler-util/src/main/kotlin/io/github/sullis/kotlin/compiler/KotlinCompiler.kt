@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
 import org.jetbrains.kotlin.config.Services
 import java.io.FileWriter
 
-object KotlinCompiler {
+class KotlinCompiler {
 
     fun compileSourceCode(vararg code: String): CompileResult {
         val sourceDir = java.nio.file.Files.createTempDirectory("KotlinCompiler-source").toFile()
