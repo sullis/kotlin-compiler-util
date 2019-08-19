@@ -11,7 +11,9 @@ import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
 import org.jetbrains.kotlin.config.Services
 import java.io.FileWriter
 
-class KotlinCompiler {
+class KotlinCompiler(val classpath: Classpath) {
+
+    constructor(): this(Classpath(System.getProperty("java.class.path")))
 
     fun compileSourceCode(vararg code: String): CompileResult {
         val sourceDir = java.nio.file.Files.createTempDirectory("KotlinCompiler-source").toFile()
@@ -39,7 +41,7 @@ class KotlinCompiler {
         val compiler = K2JVMCompiler()
         val args = K2JVMCompilerArguments()
         args.freeArgs = freeArgList
-        args.classpath = System.getProperty("java.class.path")
+        args.classpath = classpath.value
         args.compileJava = true
         args.noStdlib = true
         args.noReflect = true
