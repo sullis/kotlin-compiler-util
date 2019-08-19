@@ -27,6 +27,14 @@ class KotlinCompilerTest {
       assertEquals(0, result.errors.size)
     }
 
+    @Test fun badClasspath() {
+        val cp = Classpath("/dev/null")
+        val result = KotlinCompiler(cp).compileSourceCode(goodCode1)
+        assertFalse(result.isSuccess())
+        assertEquals(ExitCode.INTERNAL_ERROR, result.exitCode)
+        assertEquals(1, result.errors.size)
+    }
+
     @Test fun badCodeShouldNotCompile() {
         for (code in badCode) {
             val result = KotlinCompiler().compileSourceCode(code)
