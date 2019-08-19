@@ -67,6 +67,10 @@ object KotlinCompiler {
             }
         }
 
+        override fun toString(): String {
+            return errors.toString()
+        }
+
         private data class CompilerMessage(
           val severity: CompilerMessageSeverity,
           val message: String,
