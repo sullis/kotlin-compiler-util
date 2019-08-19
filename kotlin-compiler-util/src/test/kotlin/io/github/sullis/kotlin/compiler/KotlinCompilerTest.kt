@@ -5,11 +5,11 @@ import org.junit.Assert.assertFalse
 import org.junit.Test
 
 class KotlinCompilerTest {
-    private val code1 = "data class Foo(val a: String, val b: Int)"
-    private val code2 = "object Hello { fun echo(name: String): String { return name  } }"
+    private val goodCode1 = "data class Foo(val a: String, val b: Int)"
+    private val goodCode2 = "object Hello { fun echo(name: String): String { return name  } }"
 
     @Test fun compileHappyPath() {
-      val result = KotlinCompiler.compileSourceCode(code1, code2)
+      val result = KotlinCompiler.compileSourceCode(goodCode1, goodCode2)
       assertTrue(result.isSuccess())
     }
 
