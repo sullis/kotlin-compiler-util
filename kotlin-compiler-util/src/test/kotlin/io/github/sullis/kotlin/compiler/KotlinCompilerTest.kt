@@ -29,7 +29,10 @@ class KotlinCompilerTest {
 
     @Test fun badCodeShouldNotCompile() {
         for (code in badCode) {
-            assertFalse(KotlinCompiler.compileSourceCode(code).isSuccess())
+            val result = KotlinCompiler.compileSourceCode(code)
+            assertFalse(result.isSuccess())
+            assertEquals(ExitCode.COMPILATION_ERROR, result.exitCode)
+            assertTrue(result.errors.isNotEmpty())
         }
     }
 }
