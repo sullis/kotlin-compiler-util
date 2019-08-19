@@ -13,7 +13,7 @@ version = VERSION_NAME
 
 tasks.named<Jar>("jar") {
   manifest {
-    attributes("Automatic-Module-Name" to "io.github.sullis.kotline.compiler.util")
+    attributes("Automatic-Module-Name" to "io.github.sullis.kotlin.compiler.util")
   }
 }
 
@@ -23,7 +23,7 @@ dependencies {
   implementation(deps.kotlin.compiler)
   testImplementation(deps.kotlin.junit)
   testImplementation(deps.kotlin.compiler)
-  testImplementation(deps.test.truth)
+  testImplementation(deps.test.guava)
 }
 
 repositories {

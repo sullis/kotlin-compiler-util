@@ -14,7 +14,6 @@ object deps {
     const val junit = "org.jetbrains.kotlin:kotlin-test-junit"
   }
   object test {
-    const val truth = "com.google.truth:truth:1.0"
     const val guava = "com.google.guava:guava:28.0-jre"
   }
 }
