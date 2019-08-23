@@ -13,7 +13,7 @@ import java.io.FileWriter
 
 class KotlinCompiler(val classpath: Classpath) {
 
-    constructor(): this(Classpath(System.getProperty("java.class.path")))
+    constructor() : this(Classpath(System.getProperty("java.class.path")))
 
     fun compileSourceCode(vararg code: String): CompileResult {
         val sourceDir = java.nio.file.Files.createTempDirectory("KotlinCompiler-source").toFile()
@@ -55,9 +55,9 @@ class KotlinCompiler(val classpath: Classpath) {
     }
 
     data class CompilerMessage(
-            val severity: CompilerMessageSeverity,
-            val message: String,
-            val location: CompilerMessageLocation?
+      val severity: CompilerMessageSeverity,
+      val message: String,
+      val location: CompilerMessageLocation?
     )
 
     private class MessageCollectorImpl : MessageCollector {

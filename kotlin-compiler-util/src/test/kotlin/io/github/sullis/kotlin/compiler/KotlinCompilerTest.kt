@@ -1,11 +1,13 @@
 package io.github.sullis.kotlin.compiler
 
 import org.jetbrains.kotlin.cli.common.ExitCode
-import org.junit.Assert.*
+import org.junit.Assert.assertTrue
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.io.File
 import java.io.FileWriter
-import java.util.*
+import java.util.UUID
 
 class KotlinCompilerTest {
     private val goodCode1 = "data class Foo(val a: String, val b: Int)"
