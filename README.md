@@ -26,3 +26,8 @@ CompileResult result = compiler.compileSourceDir(sourceDir);
 assertTrue(result.isSuccessful(), result.errors());
 
 ```
+
+# Similar projects
+
+- https://github.com/tschuchortdev/kotlin-compile-testing
+- https://github.com/google/compile-testing
