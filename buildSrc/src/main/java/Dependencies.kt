@@ -14,6 +14,6 @@ object deps {
     const val junit = "org.jetbrains.kotlin:kotlin-test-junit"
   }
   object test {
-    const val guava = "com.google.guava:guava:28.0-jre"
+    const val guava = "com.google.guava:guava:28.1-jre"
   }
 }
