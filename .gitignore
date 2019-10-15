@@ -31,6 +31,8 @@ obj
 # Log file
 *.log
 
+!gradle-wrapper.jar
+
 # Package Files #
 *.jar
 *.war
