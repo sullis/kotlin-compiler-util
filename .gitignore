@@ -32,6 +32,7 @@ obj
 *.log
 
 !gradle/wrapper/gradle-wrapper.jar
+!gradle-wrapper.jar
 
 # Package Files #
 *.jar
