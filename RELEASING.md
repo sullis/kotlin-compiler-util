@@ -20,6 +20,6 @@ Prerequisites
 
 In `~/.gradle/gradle.properties`, set the following:
 
- * `SONATYPE_NEXUS_USERNAME
- * `SONATYPE_NEXUS_PASSWORD
+ * `SONATYPE_NEXUS_USERNAME`
+ * `SONATYPE_NEXUS_PASSWORD`
  
