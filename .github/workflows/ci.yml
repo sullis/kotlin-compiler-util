@@ -9,13 +9,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2.4.0
     - name: Gradle wrapper validation
-      uses: gradle/wrapper-validation-action@v1.0.4
+      uses: gradle/wrapper-validation-action@v1
     - name: Set up JDK
       uses: actions/setup-java@v2
       with:
         distribution: 'zulu'
         java-version: ${{ matrix.java }}
-    - name: print Java version
-      run: java -version
     - name: Build with Gradle
       run: ./gradlew clean build
