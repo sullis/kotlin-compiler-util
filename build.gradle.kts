@@ -1,5 +1,5 @@
 plugins {
-  kotlin("jvm") version versions.kotlin apply false
+  kotlin("jvm") version 1.7.22 apply false
   id("com.diffplug.gradle.spotless") version versions.spotless
 }
 
