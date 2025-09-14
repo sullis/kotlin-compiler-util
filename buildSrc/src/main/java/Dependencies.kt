@@ -1,8 +1,8 @@
 object versions {
-  const val kotlin = "2.0.21"
+  const val kotlin = "2.2.20"
   const val spotless = "3.25.0"
   const val ktlint = "0.31.0"
-  const val mavenPublish = "0.14.2"
+  const val mavenPublish = "0.34.0"
   const val shadowPlugin = "5.0.0"
 }
 
