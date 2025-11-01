@@ -1,6 +1,6 @@
 # kotlin-compiler-util
 
-Kotlin compiler utility
+kotlin compiler utility
 
 # Maven pom.xml
 
