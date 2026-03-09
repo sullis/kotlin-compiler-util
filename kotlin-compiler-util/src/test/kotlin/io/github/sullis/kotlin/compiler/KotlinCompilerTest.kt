@@ -55,6 +55,61 @@ class KotlinCompilerTest {
         }
     }
 
+    @Test fun defaultConstructorUsesSystemClasspath() {
+        val compiler = KotlinCompiler()
+        assertEquals(System.getProperty("java.class.path"), compiler.classpath.value)
+    }
+
+    @Test fun compileSingleFile() {
+        val result = KotlinCompiler().compileSourceCode(goodCode1)
+        assertTrue(result.isSuccess())
+    }
+
+    @Test fun multipleSequentialCompilationsAreIndependent() {
+        val compiler = KotlinCompiler()
+        val result1 = compiler.compileSourceCode(goodCode1)
+        val result2 = compiler.compileSourceCode(goodCode2)
+        val result3 = compiler.compileSourceCode(goodCode3)
+        assertTrue(result1.isSuccess())
+        assertTrue(result2.isSuccess())
+        assertTrue(result3.isSuccess())
+    }
+
+    @Test fun errorMessagesHaveErrorSeverity() {
+        val result = KotlinCompiler().compileSourceCode("val x: String = 42")
+        assertFalse(result.isSuccess())
+        assertEquals(ExitCode.COMPILATION_ERROR, result.exitCode)
+        assertTrue(result.errors.isNotEmpty())
+        for (error in result.errors) {
+            assertTrue("Expected error severity, got ${error.severity}", error.severity.isError)
+        }
+    }
+
+    @Test fun errorMessagesContainText() {
+        val result = KotlinCompiler().compileSourceCode("val x: String = 42")
+        assertTrue(result.errors.isNotEmpty())
+        for (error in result.errors) {
+            assertTrue(error.message.isNotBlank())
+        }
+    }
+
+    @Test fun compileSourceDirWithEmptyDirectory() {
+        val emptyDir = java.nio.file.Files.createTempDirectory("KotlinCompilerTest-empty").toFile()
+        emptyDir.deleteOnExit()
+        val result = KotlinCompiler().compileSourceDir(emptyDir.toPath())
+        // Compiling an empty directory produces a result (no crash); the compiler reports no sources found
+        assertFalse(result.isSuccess())
+    }
+
+    @Test fun compileResultExitCodeMatchesSuccess() {
+        val success = KotlinCompiler().compileSourceCode(goodCode1)
+        assertEquals(ExitCode.OK, success.exitCode)
+        assertEquals(0, success.errors.size)
+
+        val failure = KotlinCompiler().compileSourceCode(badCode[0])
+        assertEquals(ExitCode.COMPILATION_ERROR, failure.exitCode)
+    }
+
     private fun createTempDir(): File {
       return java.nio.file.Files.createTempDirectory("KotlinCompilerTest").toFile()
     }
