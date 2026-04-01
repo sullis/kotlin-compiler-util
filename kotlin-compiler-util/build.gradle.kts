@@ -2,7 +2,7 @@
 plugins {
   kotlin("jvm")
   id("com.vanniktech.maven.publish") version versions.mavenPublish
-  id("org.jetbrains.dokka") version "2.1.0"
+  id("org.jetbrains.dokka") version "2.2.0"
 }
 
 val GROUP: String by project
